@@ -1,0 +1,13 @@
+*~
+*.mex*
+.ipynb_checkpoints
+data
+*.pyc
+*-eps-converted-to.pdf
+*.aux
+*.log
+*.synctex.gz
+*.bbl
+*.blg
+.DS_Store
+__pycache__
