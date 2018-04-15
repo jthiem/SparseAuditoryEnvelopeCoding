@@ -17,9 +17,18 @@ L = 512;
 
 SAMP.ef = zeros(M,L);
 
+% This fudge is to allow the code to run in octave or matlab
+if exist ('OCTAVE_VERSION', 'builtin') > 0
+    L_ef = L-1;
+    L_firls = L-2;
+else
+    L_ef = L;
+    L_firls = L-1;
+end
+    
 for m = 1:M
-    SAMP.ef(m,:) = ...
-        firls( L-1, [ 0 bws(m)*.9 bws(m)*1.1 1 ], [ 1 1 0.1 0]);
+    SAMP.ef(m,1:L_ef) = ...
+        firls( L_firls, [ 0 bws(m)*.9 bws(m)*1.1 1 ], [ 1 1 0.1 0]);
     fprintf('.');
 end
 fprintf('\n');
