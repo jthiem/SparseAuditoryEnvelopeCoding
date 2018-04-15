@@ -61,7 +61,7 @@ r = 1.0;
 %
 % Load the audio file
 % MAKE SURE THE FILE IS MONO AND SAMPLED AT 16kHz!
-in = audioread( 'Databases/TIMIT/TIMIT/TEST/DR1/FAKS0/SA1_conv.wav' );
+in = audioread( 'MH46_08.wav' );
 
 % to allow for delay and runout, extend by 1 sec
 in = [ in; zeros(8000,1) ];
