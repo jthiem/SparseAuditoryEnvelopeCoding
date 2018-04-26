@@ -11,9 +11,8 @@ function [ FD ] = FBsetup( FD )
 %     gd: "group delay", the number of samples at which the peak
 %         of the Gammatone envelope will be.  If 0, peaks will not
 %         be aligned.  If empty, peak is automatic minimum.
-%     L:  If given, filters are fixed-length, if 0, L is determined
-%         automatically (and replaced).  If not given, variable-length
-%         filterbank is generated.
+%     L:  Length of filters. If 0 or not given, L is determined
+%         automatically (and replaced).
 %
 %    Output fields:
 %     fc: Filter center frequencies, derived from Ms
@@ -34,6 +33,20 @@ function [ FD ] = FBsetup( FD )
 % and http://creativecommons.org/licenses/by/3.0/
 
 %%
+
+% defaults
+if nargin==0
+    FD = struct();
+end
+if ~isfield(FD, 'Ms')
+    FD.Ms = 1:.5:32;
+end
+if ~isfield(FD, 'fs')
+    FD.fs = 16000;
+end
+if ~isfield(FD, 'L')
+    FD.L = 0;
+end
 
 % Calculate the center frequencies
 FD.fc = (1000/4.37) * (10.^(FD.Ms./21.4) - 1)';
@@ -67,7 +80,6 @@ else
 end        
 FD.G = zeros(FD.M,FD.L);
 
-% If L is _not_ given, don't _store_ fixed-length filters
 for m = 1:FD.M
     temp = makeFiltFixed( m, Ltemp, FD );
     FD.G(m,:) = temp;
