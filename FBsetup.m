@@ -58,7 +58,7 @@ if FD.fc(FD.M) > (FD.fs/2)
 end
 
 % precompute b
-FD.b = 1.019 * ERB( FD.fc );
+FD.b = 1.0186 * ERB( FD.fc );
 
 % Peak alignment
 if ~isfield(FD,'gd')
@@ -117,5 +117,5 @@ end
 
 %% ERB
 function erb = ERB( f )
-erb = 0.1079.*f + 24.7;
+erb = 0.108.*f + 24.7;
 end
